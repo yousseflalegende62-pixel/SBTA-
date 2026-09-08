@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SBTA — Transport Routier</title>
+
+    <meta name="description" content="SBTA - Transport routier au départ de Divo. Réservez votre voyage et contactez-nous facilement.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fa;
+            color: #17202a;
+            line-height: 1.6;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            background: #0b1f3a;
+            color: white;
+            padding: 15px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.2);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #f5b400;
+        }
+
+        nav {
+            display: flex;
+            gap: 22px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #f5b400;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+
+            background:
+                linear-gradient(rgba(5,20,40,0.78), rgba(5,20,40,0.78)),
+                url("https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1600&q=80");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 7vw, 75px);
+            margin-bottom: 15px;
+        }
+
+        .hero h1 span {
+            color: #f5b400;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #f5b400;
+            color: #0b1f3a;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            background: #ffc72c;
+        }
+
+        .btn-secondary {
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #0b1f3a;
+        }
+
+        /* ================= SECTIONS ================= */
+
+        section {
+            padding: 75px 6%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 35px;
+            color: #0b1f3a;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #667085;
+        }
+
+        /* ================= SERVICES ================= */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+        }
+
+        .card-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: #0b1f3a;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #667085;
+        }
+
+        /* ================= DESTINATIONS ================= */
+
+        .destinations {
+            background: #0b1f3a;
+            color: white;
+        }
+
+        .destinations .section-title h2 {
+            color: white;
+        }
+
+        .destination-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .destination {
+            background: rgba(255,255,255,0.08);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .destination h3 {
+            color: #f5b400;
+            margin-bottom: 7px;
+        }
+
+        /* ================= RESERVATION ================= */
+
+        .reservation-box {
+            max-width: 850px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+        }
+
+        form {
+            display: grid;
+            gap: 18px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 7px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #d0d5dd;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #f5b400;
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 8px;
+            background: #0b1f3a;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #f5b400;
+            color: #0b1f3a;
+        }
+
+        /* ================= CONTACT ================= */
+
+        .contact {
+            background: #eef2f6;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+        }
+
+        .contact-card .icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .contact-card a {
+            color: #0b1f3a;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #071629;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        footer strong {
+            color: #f5b400;
+        }
+
+        /* ================= WHATSAPP ================= */
+
+        .whatsapp {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 58px;
+            height: 58px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-size: 29px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+            z-index: 2000;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 700px) {
+
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav {
+                gap: 12px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav a {
+                font-size: 13px;
+            }
+
+            .hero {
+                min-height: 75vh;
+            }
+
+            .hero p {
+                font-size: 17px;
+            }
+
+            section {
+                padding: 55px 5%;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .reservation-box {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+
+        <div class="logo">
+            SB<span>TA</span>
+        </div>
+
+        <nav>
+            <a href="#accueil">Accueil</a>
+            <a href="#services">Services</a>
+            <a href="#destinations">Destinations</a>
+            <a href="#reservation">Réservation</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+    </header>
+
+
+    <!-- ================= ACCUEIL ================= -->
+
+    <section class="hero" id="accueil">
+
+        <div class="hero-content">
+
+            <h1>Voyagez avec <span>SBTA</span></h1>
+
+            <p>
+                Votre transport routier au départ de Divo.
+                Voyagez confortablement, simplement et en toute tranquillité.
+            </p>
+
+            <div class="buttons">
+
+                <a href="#reservation" class="btn btn-primary">
+                    🎫 Réserver un voyage
+                </a>
+
+                <a href="#contact" class="btn btn-secondary">
+                    📞 Nous contacter
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= SERVICES ================= -->
+
+    <section id="services">
+
+        <div class="section-title">
+
+            <h2>Nos services</h2>
+
+            <p>
+                SBTA vous accompagne pour vos déplacements et vos envois.
+            </p>
+
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="card-icon">🚌</div>
+                <h3>Transport de voyageurs</h3>
+                <p>
+                    Voyagez confortablement depuis Divo vers vos différentes destinations.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🎫</div>
+                <h3>Réservation</h3>
+                <p>
+                    Réservez facilement votre voyage grâce à notre formulaire.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">📦</div>
+                <h3>Transport de colis</h3>
+                <p>
+                    Confiez-nous vos colis pour leur acheminement vers leur destination.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">📍</div>
+                <h3>Départ de Divo</h3>
+                <p>
+                    Notre service est basé à Divo pour faciliter vos déplacements.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= DESTINATIONS ================= -->
+
+    <section class="destinations" id="destinations">
+
+        <div class="section-title">
+
+            <h2>Nos destinations</h2>
+
+            <p>
+                Découvrez quelques destinations proposées par SBTA.
+            </p>
+
+        </div>
+
+        <div class="destination-list">
+
+            <div class="destination">
+                <h3>📍 Divo → Abidjan</h3>
+                <p>Départ depuis notre ville principale.</p>
+            </div>
+
+            <div class="destination">
+                <h3>📍 Divo → Yamoussoukro</h3>
+                <p>Voyagez facilement vers la capitale politique.</p>
+            </div>
+
+            <div class="destination">
+                <h3>📍 Divo → Gagnoa</h3>
+                <p>Une destination proche et accessible.</p>
+            </div>
+
+            <div class="destination">
+                <h3>📍 Divo → Bouaké</h3>
+                <p>Transport routier vers le centre de la Côte d'Ivoire.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= RESERVATION ================= -->
+
+    <section id="reservation">
+
+        <div class="section-title">
+
+            <h2>Réserver un voyage</h2>
+
+            <p>
+                Remplissez les informations ci-dessous.
+            </p>
+
+        </div>
+
+        <div class="reservation-box">
+
+            <form onsubmit="reservation(event)">
+
+                <div class="form-row">
+
+                    <div>
+                        <label for="depart">Ville de départ</label>
+
+                        <input
+                            type="text"
+                            id="depart"
+                            value="Divo"
+                            readonly
+                        >
+                    </div>
+
+                    <div>
+                        <label for="destination">Destination</label>
+
+                        <select id="destination" required>
+
+                            <option value="">Choisir une destination</option>
+
+                            <option>Abidjan</option>
+                            <option>Yamoussoukro</option>
+                            <option>Gagnoa</option>
+                            <option>Bouaké</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div>
+                        <label for="date">Date du voyage</label>
+
+                        <input
+                            type="date"
+                            id="date"
+                            required
+                        >
+                    </div>
+
+                    <div>
+                        <label for="passagers">Nombre de passagers</label>
+
+                        <input
+                            type="number"
+                            id="passagers"
+                            min="1"
+                            max="20"
+                            value="1"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+
+                <div>
+
+                    <label for="nom">Nom du passager</label>
+
+                    <input
+                        type="text"
+                        id="nom"
+                        placeholder="Votre nom"
+                        required
+                    >
+
+                </div>
+
+
+                <button type="submit">
+                    🎫 Envoyer la demande de réservation
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CONTACT ================= -->
+
+    <section class="contact" id="contact">
+
+        <div class="section-title">
+
+            <h2>Contactez SBTA</h2>
+
+            <p>
+                Notre équipe est disponible pour répondre à vos questions.
+            </p>
+
+        </div>
+
+        <div class="contact-grid">
+
+            <div class="contact-card">
+
+                <div class="icon">📍</div>
+
+                <h3>Ville de départ</h3>
+
+                <p>Divo, Côte d'Ivoire</p>
+
+            </div>
+
+
+            <div class="contact-card">
+
+                <div class="icon">📞</div>
+
+                <h3>Téléphone</h3>
+
+                <a href="tel:0564677033">
+                    05 64 67 70 33
+                </a>
+
+            </div>
+
+
+            <div class="contact-card">
+
+                <div class="icon">💬</div>
+
+                <h3>WhatsApp</h3>
+
+                <a
+                    href="https://wa.me/2250566616576"
+                    target="_blank"
+                >
+                    05 66 61 65 76
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            © 2026 <strong>SBTA</strong> — Transport Routier
+        </p>
+
+        <p>
+            Divo, Côte d'Ivoire
+        </p>
+
+    </footer>
+
+
+    <!-- ================= WHATSAPP ================= -->
+
+    <a
+        class="whatsapp"
+        href="https://wa.me/2250566616576"
+        target="_blank"
+        aria-label="Contacter SBTA sur WhatsApp"
+    >
+        💬
+    </a>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        function reservation(event) {
+
+            event.preventDefault();
+
+            const destination =
+                document.getElementById("destination").value;
+
+            const date =
+                document.getElementById("date").value;
+
+            const passagers =
+                document.getElementById("passagers").value;
+
+            const nom =
+                document.getElementById("nom").value;
+
+            if (!destination || !date || !passagers || !nom) {
+
+                alert("Veuillez remplir tous les champs.");
+
+                return;
+
+            }
+
+            alert(
+                "Merci " + nom +
+                " ! Votre demande de réservation pour " +
+                destination +
+                " le " +
+                date +
+                " pour " +
+                passagers +
+                " passager(s) a bien été enregistrée."
+            );
+
+        }
+
+    </script>
+
+</body>
+</html>
+
+
